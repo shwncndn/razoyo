@@ -1,16 +1,21 @@
 defmodule Order do
-  @derive Jason.Encoder
   @enforce_keys [
     :type,
     :id,
     :subtotal,
     :tax,
     :total,
-    :customer_id,
+    :customer_id
   ]
   defstruct @enforce_keys
 
-  def parse(order_lines) do
+  def export(var) do
+    var
+    |> parse()
+  end
+
+
+  defp parse(order_lines) do
     orders = Enum.filter(order_lines, &String.starts_with?(&1, "order"))
     lines = Enum.filter(order_lines, &String.starts_with?(&1, "order-line"))
 
@@ -28,28 +33,25 @@ defmodule Order do
     total = String.to_float(total)
 
     %Order{
-     type: type,
-     id: id,
-     subtotal: subtotal,
-     tax: tax,
-     total: total,
-     customer_id: customer_id
+      type: type,
+      id: id,
+      subtotal: subtotal,
+      tax: tax,
+      total: total,
+      customer_id: customer_id
     }
   end
 
   defp link_lines(order, lines) do
-   %{order |
-     order_lines: Enum.map(lines, &parse_order_line/1)
-   }
+    %{order | order_lines: Enum.map(lines, &parse_order_line/1)}
   end
 
   defp parse_order_line(line) do
-    [type, position, name, price, quantity] = String.split(line,",")
+    [type, position, name, price, quantity] = String.split(line, ",")
 
     position = String.to_integer(position)
     price = String.to_float(price)
     quantity = String.to_integer(quantity)
-
 
     %{
       type: type,
@@ -60,5 +62,4 @@ defmodule Order do
       row_total: price * quantity
     }
   end
-
 end

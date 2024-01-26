@@ -1,5 +1,4 @@
 defmodule OrderLine do
-  @derive Jason.Encoder
   @enforce_keys [
     :type,
     :position,
@@ -10,8 +9,17 @@ defmodule OrderLine do
   ]
   defstruct @enforce_keys
 
+  def export(var) do
+    var
+    |> parse()
+  end
+
   def parse(lines) do
-     Enum.map(lines, &parse_line/1)
+    Enum.map(lines, fn line ->
+      line
+      |> String.trim()
+      |> parse_line()
+    end)
   end
 
   defp parse_line(line) do
@@ -20,7 +28,6 @@ defmodule OrderLine do
     position = String.to_integer(position)
     price = String.to_float(price)
     quantity = String.to_integer(quantity)
-
 
     %OrderLine{
       type: type,

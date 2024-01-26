@@ -1,18 +1,26 @@
 defmodule Customer do
-
   @enforce_keys [
-   :type,
-   :id,
-   :name,
-   :email,
-   :age,
-   :gender]
+    :type,
+    :id,
+    :name,
+    :email,
+    :age,
+    :gender
+  ]
 
-   defstruct @enforce_keys
+  defstruct @enforce_keys
 
+  def export(var) do
+    var
+    |> parse()
+  end
 
-   def parse(lines) do
-    Enum.map(lines, &parse_line/1)
+  def parse(lines) do
+    Enum.map(lines, fn line ->
+      line
+      |> String.trim()
+      |> parse_line()
+    end)
   end
 
   defp parse_line(line) do
@@ -20,7 +28,6 @@ defmodule Customer do
 
     age = if age == "", do: nil, else: String.to_integer(age)
     gender = String.to_integer(gender)
-
 
     %Customer{
       type: type,
@@ -31,5 +38,4 @@ defmodule Customer do
       gender: gender
     }
   end
-
 end
