@@ -9,19 +9,36 @@ defmodule Order do
   ]
   defstruct @enforce_keys
 
-  def export(var) do
-    var
+  def export(orders) do
+    orders
+    |> IO.inspect(label: "ORDERS COMING IN FROM EXECUTOR")
     |> parse()
+    |> IO.inspect(label: "ORDERS POST PARSE")
+    |> Enum.map(fn order ->
+      %{
+        "id" => order.id,
+        "head" => %{
+          "subtotal" => order.subtotal,
+          "tax" => order.tax,
+          "total" => order.total,
+          "customer" => order.customer_id
+        },
+        "lines" => order.lines
+      }
+    end)
+    |> IO.inspect(label: "ORDER PRE JSON")
+    |> Jason.encode!()
+    |> File.write!("orders.json")
+    |> IO.inspect(label: "ORDER")
   end
 
-
-  defp parse(order_lines) do
-    orders = Enum.filter(order_lines, &String.starts_with?(&1, "order"))
-    lines = Enum.filter(order_lines, &String.starts_with?(&1, "order-line"))
-
-    orders = Enum.map(orders, &parse_order/1)
+  def parse(order_lines) do
+    orders = Enum.filter(order_lines, &String.starts_with?(&1, "order")) |> IO.inspect(label: "1st ORDER IN PARSE FUNC")
+    lines = Enum.filter(order_lines, &String.starts_with?(&1, "order-line")) |> IO.inspect(label: "ORDER-LINE IN PARSE FUNC")
 
     orders
+    |> IO.inspect(label: "2nd ORDER IN PARSE FUNC")
+    |> Enum.map(&parse_order/1)
     |> Enum.map(&link_lines(&1, lines))
   end
 
@@ -32,18 +49,22 @@ defmodule Order do
     tax = String.to_float(tax)
     total = String.to_float(total)
 
+
+
     %Order{
-      type: type,
-      id: id,
+      type: String.trim(type, "\""),
+      id: String.trim(id, "\""),
       subtotal: subtotal,
       tax: tax,
       total: total,
-      customer_id: customer_id
+      customer_id: String.trim(customer_id, "\"")
     }
-  end
+    end
 
   defp link_lines(order, lines) do
-    %{order | order_lines: Enum.map(lines, &parse_order_line/1)}
+    order_lines = Enum.map(lines, &parse_order_line/1)
+
+    Map.put(order, :lines, order_lines)
   end
 
   defp parse_order_line(line) do

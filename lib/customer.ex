@@ -29,13 +29,15 @@ defmodule Customer do
     age = if age == "", do: nil, else: String.to_integer(age)
     gender = String.to_integer(gender)
 
+
+
     %Customer{
-      type: type,
-      id: id,
-      name: name,
-      email: email,
+      type: String.trim(type, "\""),
+      id: String.trim(id, "\""),
+      name: String.trim(name, "\""),
+      email: String.trim(email, "\""),
       age: age,
       gender: gender
-    }
+    } |> IO.inspect(label: "CUSTOMER STRUCT")
   end
 end

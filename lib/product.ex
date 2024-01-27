@@ -8,12 +8,11 @@ defmodule Product do
     :currency
   ]
 
-
   def export(var) do
     var
     |> parse()
     |> write()
-    |> IO.inspect()
+    |> IO.inspect(label: "PRODUCT")
   end
 
   def write(products) do
@@ -28,7 +27,6 @@ defmodule Product do
     |> Enum.map(&parse_line/1)
   end
 
-
   defp parse_line(line) do
     [type, sku, name, brand, price, currency] = String.split(line, ",")
 
@@ -38,7 +36,7 @@ defmodule Product do
       |> String.trim("\"")
       |> String.trim("\n")
 
-     %Product{
+    %Product{
       type: String.trim(type, "\""),
       sku: String.trim(sku, "\""),
       name: String.trim(name, "\""),
@@ -46,7 +44,5 @@ defmodule Product do
       price: String.to_float(price),
       currency: String.trim(currency, "\"")
     }
-
-
-end
+  end
 end

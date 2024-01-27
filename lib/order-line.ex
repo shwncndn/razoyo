@@ -30,12 +30,12 @@ defmodule OrderLine do
     quantity = String.to_integer(quantity)
 
     %OrderLine{
-      type: type,
+      type: String.trim(type, "\""),
       position: position,
-      name: name,
+      name: String.trim(name, "\""),
       price: price,
       quantity: quantity,
       row_total: price * quantity
-    }
+    } |> IO.inspect(label: "ORDER LINE STRUCT")
   end
 end
