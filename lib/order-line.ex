@@ -11,7 +11,9 @@ defmodule OrderLine do
 
   def export(var) do
     var
+    |> IO.inspect(label: "BEFORE")
     |> parse()
+    |> IO.inspect(label: "AFTER")
   end
 
   def parse(lines) do
