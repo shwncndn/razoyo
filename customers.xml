@@ -1,19 +1,22 @@
-
+<customers>
+<customer>
 <id>CST9104</id>
 <name>John Jones</name>
-<type>customer</type>
 <email>jjones@email.com</email>
 <age>25</age>
 <gender>1</gender>
+</customer>
+<customer>
 <id>CST2019</id>
 <name>Peter Parker</name>
-<type>customer</type>
 <email>spidey@email.com</email>
 <age>19</age>
 <gender>1</gender>
+</customer>
+<customer>
 <id>CST9140</id>
 <name>Molly Hatchet</name>
-<type>customer</type>
 <email>classicrock@email.com</email>
-<age></age>
 <gender>2</gender>
+</customer>
+</customers>

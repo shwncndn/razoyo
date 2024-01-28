@@ -11,8 +11,8 @@ defmodule Product do
     :currency
   ]
 
-  def export(var) do
-    var
+  def export(products) do
+    products
     |> parse()
     |> write()
     |> IO.inspect(label: "PRODUCT")

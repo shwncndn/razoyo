@@ -6,7 +6,7 @@ defmodule Razoyo.Executor do
     contents = File.stream!(filepath) |> IO.inspect(label: "BEFORE GROUP BY")
 
     grouped_lines =
-      Enum.group_by(contents, &get_line_type/1)
+      Enum.group_by(contents, &line_type/1)
       |> IO.inspect(label: "AFTER GROUP BY")
 
     Enum.each(grouped_lines, fn {type, lines} ->
@@ -17,7 +17,7 @@ defmodule Razoyo.Executor do
     end)
   end
 
-  defp get_line_type(line) do
+  defp line_type(line) do
     [type | _] = String.split(line, ",")
     type
   end
@@ -25,5 +25,5 @@ defmodule Razoyo.Executor do
   defp module_name("customer"), do: Customer
   defp module_name("product"), do: Product
   # defp module_name("order"), do: Order
-  # defp module_name("order-line"), do: OrderLine
+  # defp module_name("order-line"), do: Order
 end

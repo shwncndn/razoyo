@@ -1,0 +1,9 @@
+<customers><%= for customer <- @customers do %>
+<customer>
+<id><%= customer.id %></id>
+<name><%= customer.name %></name>
+<email><%= customer.email %></email><%= if customer.age do %>
+<age><%= customer.age %></age><% end %>
+<gender><%= customer.gender %></gender>
+</customer><% end %>
+</customers>
