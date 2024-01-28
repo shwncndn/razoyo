@@ -1,4 +1,11 @@
 %{
+  "bunt": {:hex, :bunt, "1.0.0", "081c2c665f086849e6d57900292b3a161727ab40431219529f13c4ddcf3e7a44", [:mix], [], "hexpm", "dc5f86aa08a5f6fa6b8096f0735c4e76d54ae5c9fa2c143e5a1fc7c1cd9bb6b5"},
+  "credo": {:hex, :credo, "1.7.3", "05bb11eaf2f2b8db370ecaa6a6bda2ec49b2acd5e0418bc106b73b07128c0436", [:mix], [{:bunt, "~> 0.2.1 or ~> 1.0", [hex: :bunt, repo: "hexpm", optional: false]}, {:file_system, "~> 0.2 or ~> 1.0", [hex: :file_system, repo: "hexpm", optional: false]}, {:jason, "~> 1.0", [hex: :jason, repo: "hexpm", optional: false]}], "hexpm", "35ea675a094c934c22fb1dca3696f3c31f2728ae6ef5a53b5d648c11180a4535"},
   "csv": {:hex, :csv, "3.2.1", "6d401f1ed33acb2627682a9ab6021e96d33ca6c1c6bccc243d8f7e2197d032f5", [:mix], [], "hexpm", "8f55a0524923ae49e97ff2642122a2ce7c61e159e7fe1184670b2ce847aee6c8"},
+  "elixir_map_to_xml": {:hex, :elixir_map_to_xml, "0.1.0", "938ece68237e5aaccbe1d2b1146f850cda7ad4ac7d4106026d6b3d4c2086bce9", [:mix], [{:xml_builder, "~> 2.1.1", [hex: :xml_builder, repo: "hexpm", optional: false]}], "hexpm", "fef8cc1c57d9cf442491e6b94cf7ed606fd1c04dbdf0ce9626066a78c0f6a2f5"},
+  "file_system": {:hex, :file_system, "1.0.0", "b689cc7dcee665f774de94b5a832e578bd7963c8e637ef940cd44327db7de2cd", [:mix], [], "hexpm", "6752092d66aec5a10e662aefeed8ddb9531d79db0bc145bb8c40325ca1d8536d"},
+  "floki": {:hex, :floki, "0.35.3", "0c8c6234aa71cb2b069cf801e8f8f30f8d096eb452c3dae2ccc409510ec32720", [:mix], [], "hexpm", "6d9f07f3fc76599f3b66c39f4a81ac62c8f4d9631140268db92aacad5d0e56d4"},
   "jason": {:hex, :jason, "1.4.1", "af1504e35f629ddcdd6addb3513c3853991f694921b1b9368b0bd32beb9f1b63", [:mix], [{:decimal, "~> 1.0 or ~> 2.0", [hex: :decimal, repo: "hexpm", optional: true]}], "hexpm", "fbb01ecdfd565b56261302f7e1fcc27c4fb8f32d56eab74db621fc154604a7a1"},
+  "xml_builder": {:hex, :xml_builder, "2.1.4", "e60e21c0a39b9dd8dec1db5a2525c713f7fe4e85ed247caedf22a9bcdd2d5069", [:mix], [], "hexpm", "48188a4df8b9168ceb8318d128299bce064d272e18967349b2592347c434e677"},
+  "xml_builder_ex": {:hex, :xml_builder_ex, "3.1.4", "51ed01bbe899d5b6e709a17b57dd3de0fbbdbb15c5a6757161bae9e141f76deb", [:mix], [], "hexpm", "699795ac95202cf74d7a045ee4416119c611886c25ed33819bcfd64d874b0376"},
 }

@@ -1,77 +1,86 @@
-defmodule Order do
-  @enforce_keys [
-    :type,
-    :id,
-    :subtotal,
-    :tax,
-    :total,
-    :customer_id
-  ]
-  defstruct @enforce_keys
+# defmodule Order do
+#   @moduledoc """
+#   Order struct module for orders.
+#   """
 
-  def export(orders) do
-    orders
-    |> IO.inspect(label: "ORDERS COMING IN FROM EXECUTOR")
-    |> String.trim("\"")
-    |> parse()
-    |> IO.inspect(label: "ORDERS POST PARSE")
-    |> Jason.encode!()
-    |> File.write!("orders.json")
-    |> IO.inspect(label: "ORDER")
-  end
+#   @enforce_keys [
+#     :type,
+#     :id,
+#     :subtotal,
+#     :tax,
+#     :total,
+#     :customer_id
+#   ]
+#   defstruct @enforce_keys
 
-  def parse(lines) do
-    Enum.map(lines, fn line ->
-      line
-      |> String.trim()
-      |> parse_line()
-    end)
-  end
+#   def export(orders) do
+#     orders
+#     |> IO.inspect(label: "ORDERS COMING IN FROM EXECUTOR")
+#     |> parse()
+#     |> IO.inspect(label: "ORDERS POST PARSE")
+#     |> IO.inspect(label: "ORDER PRE JSON")
+#     |> Jason.encode!()
+#     |> File.write!("orders.json", orders)
+#     |> IO.inspect(label: "ORDER")
+#   end
 
-  defp parse_line(line) do
-    [type, id, subtotal, tax, total, customer_id] = String.split(line, ",")
+#   def parse(order_lines) do
 
-    subtotal = String.to_float(subtotal)
-    tax = String.to_float(tax)
-    total = String.to_float(total)
+#     # lines = Enum.filter(order_lines, &String.starts_with?(&1, "\"order-line\"")) |> IO.inspect(label: "1st ORDER IN PARSE FUNC")
+#     orders = Enum.filter(order_lines, &String.starts_with?(&1, "\"order\"")) |> IO.inspect(label: "ORDER-LINE IN PARSE FUNC")
 
-    %Order{
-      type: String.trim(type, "\""),
-      id: String.trim(id, "\""),
-      subtotal: subtotal,
-      tax: tax,
-      total: total,
-      customer_id: String.trim(customer_id, "\"")
-    }
-  end
+#     orders |> Enum.map(&clean_data/1)|> Enum.map(&parse_order/1)
+#     # Enum.map(lines, &parse_order_line/1)
 
+#   end
 
-    def link_lines(orders, lines) do
-      Enum.map(orders, fn order ->
-        order_lines =
-          lines
-          |> Enum.filter(fn line ->
-            line.order_id == order.id
-          end)
+#   defp clean_data(line) do
+#     line |> String.trim("\"") |> Enum.join(",")
+#   end
 
-        Map.put(order, :order_lines, order_lines)
-      end)
-    end
+#   defp parse_order(line) do
+#     [type, id, subtotal, tax, total, customer_id] = String.split(line, ",")
 
-  def parse_order_line(line) do
-    [type, position, name, price, quantity] = String.split(line, ",")
+#     subtotal = String.to_float(subtotal)
+#     tax = String.to_float(tax)
+#     total = String.to_float(total)
 
-    position = String.to_integer(position)
-    price = String.to_float(price)
-    quantity = String.to_integer(quantity)
+#     %Order{
+#       type: String.trim(type, "\""),
+#       id: String.trim(id, "\""),
+#       subtotal: subtotal,
+#       tax: tax,
+#       total: total,
+#       customer_id: String.trim(customer_id, "\"")
+#     }
+#   end
 
-    %{
-      type: type,
-      position: position,
-      name: name,
-      price: price,
-      quantity: quantity,
-      row_total: price * quantity
-    }
-  end
-end
+#     def link_lines(orders, lines) do
+#       Enum.map(orders, fn order ->
+#         order_lines =
+#           lines
+#           |> Enum.filter(fn line ->
+#             line.order_id == order.id
+#           end)
+
+#         Map.put(order, :order_lines, order_lines)
+#       end)
+#     end
+
+#   # defp parse_order_line(line) do
+#   #   [type, position, name, price, quantity] = String.split(line, ",")
+
+#   #   position = String.to_integer(position)
+#   #   price = String.to_float(price)
+#   #   quantity = String.to_integer(quantity)
+
+#   #   %{
+#   #     type: type,
+#   #     position: position,
+#   #     name: name,
+#   #     price: price,
+#   #     quantity: quantity,
+#   #     row_total: price * quantity
+#   #   }
+#   # end
+# end

@@ -1,4 +1,7 @@
 defmodule Product do
+  @moduledoc """
+  Product module
+  """
   defstruct [
     :type,
     :sku,
@@ -15,6 +18,10 @@ defmodule Product do
     |> IO.inspect(label: "PRODUCT")
   end
 
+  def parse(lines) do
+    Enum.map(lines, &parse_product/1)
+  end
+
   def write(products) do
     products
     |> Stream.map(&[&1.type, &1.sku, &1.name, &1.brand, &1.price, &1.currency])
@@ -22,12 +29,7 @@ defmodule Product do
     |> Enum.into(File.stream!("test.csv"))
   end
 
-  def parse(lines) do
-    lines
-    |> Enum.map(&parse_line/1)
-  end
-
-  defp parse_line(line) do
+  defp parse_product(line) do
     [type, sku, name, brand, price, currency] = String.split(line, ",")
 
     currency =
