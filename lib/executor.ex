@@ -3,13 +3,11 @@ defmodule Razoyo.Executor do
   Execution module for file conversion and export
   """
   def extract(filepath) do
-    contents = File.stream!(filepath) |> IO.inspect(label: "BEFORE GROUP BY")
+    contents = File.stream!(filepath)
 
-    grouped_lines =
-      Enum.group_by(contents, &line_type/1)
-      |> IO.inspect(label: "AFTER GROUP BY")
-
-    Enum.each(grouped_lines, fn {type, lines} ->
+    contents
+    |> Enum.group_by(&line_type/1)
+    |> Enum.each(fn {type, lines} ->
       type = String.trim(type, "\"")
       module = module_name(type)
 
@@ -24,6 +22,6 @@ defmodule Razoyo.Executor do
 
   defp module_name("customer"), do: Customer
   defp module_name("product"), do: Product
-  # defp module_name("order"), do: Order
-  # defp module_name("order-line"), do: Order
+  defp module_name("order"), do: Order
+  defp module_name("order-line"), do: OrderLine
 end

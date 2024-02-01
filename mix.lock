@@ -6,6 +6,8 @@
   "file_system": {:hex, :file_system, "1.0.0", "b689cc7dcee665f774de94b5a832e578bd7963c8e637ef940cd44327db7de2cd", [:mix], [], "hexpm", "6752092d66aec5a10e662aefeed8ddb9531d79db0bc145bb8c40325ca1d8536d"},
   "floki": {:hex, :floki, "0.35.3", "0c8c6234aa71cb2b069cf801e8f8f30f8d096eb452c3dae2ccc409510ec32720", [:mix], [], "hexpm", "6d9f07f3fc76599f3b66c39f4a81ac62c8f4d9631140268db92aacad5d0e56d4"},
   "jason": {:hex, :jason, "1.4.1", "af1504e35f629ddcdd6addb3513c3853991f694921b1b9368b0bd32beb9f1b63", [:mix], [{:decimal, "~> 1.0 or ~> 2.0", [hex: :decimal, repo: "hexpm", optional: true]}], "hexpm", "fbb01ecdfd565b56261302f7e1fcc27c4fb8f32d56eab74db621fc154604a7a1"},
+  "jason_structs": {:hex, :jason_structs, "0.3.0", "5345781b732fae6de55f83f2fe1dfad0705ed1d1f83277ab8b957cf1976d4d29", [:mix], [{:jason, "~> 1.1", [hex: :jason, repo: "hexpm", optional: false]}, {:typed_struct, "~> 0.2.1", [hex: :typed_struct, repo: "hexpm", optional: false]}], "hexpm", "bcf6480b2e654cc31a98f924a1607a2db888d0e5be7ce2d2aa038bd5ac90de0d"},
+  "typed_struct": {:hex, :typed_struct, "0.2.1", "e1993414c371f09ff25231393b6430bd89d780e2a499ae3b2d2b00852f593d97", [:mix], [], "hexpm", "8f5218c35ec38262f627b2c522542f1eae41f625f92649c0af701a6fab2e11b3"},
   "xml_builder": {:hex, :xml_builder, "2.2.0", "cc5f1eeefcfcde6e90a9b77fb6c490a20bc1b856a7010ce6396f6da9719cbbab", [:mix], [], "hexpm", "9d66d52fb917565d358166a4314078d39ef04d552904de96f8e73f68f64a62c9"},
   "xml_builder_ex": {:hex, :xml_builder_ex, "3.1.4", "51ed01bbe899d5b6e709a17b57dd3de0fbbdbb15c5a6757161bae9e141f76deb", [:mix], [], "hexpm", "699795ac95202cf74d7a045ee4416119c611886c25ed33819bcfd64d874b0376"},
 }

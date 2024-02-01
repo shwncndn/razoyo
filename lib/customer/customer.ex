@@ -47,6 +47,5 @@ defmodule Customer do
       age: age,
       gender: gender
     }
-    |> IO.inspect(label: "CUSTOMER STRUCT PARSE RESULT")
   end
 end

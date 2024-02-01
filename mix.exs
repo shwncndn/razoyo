@@ -22,6 +22,7 @@ defmodule Razoyo.MixProject do
   defp deps do
     [
       {:jason, "~> 1.4"},
+      {:jason_structs, "~> 0.3.0"},
       {:csv, "~> 3.2"},
       {:credo, "~> 1.7"},
       {:xml_builder, "~> 2.2"}

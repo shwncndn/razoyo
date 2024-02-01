@@ -1,23 +1,38 @@
-# defmodule OrderLine do
+defmodule OrderLine do
+  @moduledoc """
+  Order line
+  """
+  @enforce_keys [
+    :position,
+    :name,
+    :price,
+    :quantity,
+    :row_total
+  ]
+  defstruct @enforce_keys
 
-#   @moduledoc """
-#   Order line
-#   """
-#   @enforce_keys [
-#     :type,
-#     :position,
-#     :name,
-#     :price,
-#     :quantity,
-#     :row_total
-#   ]
-#   defstruct @enforce_keys
+  def build(line_string) do
+    [position, name, price, quantity] =
+      String.split(line_string, ",")
+
+    row_total = String.to_float(price) * String.to_integer(quantity)
+
+    %OrderLine{
+      position: String.to_integer(position),
+      name: name,
+      price: String.to_float(price),
+      quantity: String.to_integer(quantity),
+      row_total: row_total
+    }
+  end
+end
+
+
+
 
 #   def export(var) do
 #     var
-#     |> IO.inspect(label: "BEFORE")
 #     |> parse()
-#     |> IO.inspect(label: "AFTER")
 #   end
 
 #   def parse(lines) do
@@ -42,6 +57,7 @@
 #       price: price,
 #       quantity: quantity,
 #       row_total: price * quantity
-#     } |> IO.inspect(label: "ORDER LINE STRUCT")
+#     }
+#     |> IO.inspect(label: "ORDER LINE STRUCT")
 #   end
 # end
